@@ -27,20 +27,19 @@
 <body>
 <header>
   <h1>Price Store</h1>
-  <p class="sub">Apps by Andrew Price — no Google account, no Google rules. $1.99 each via Cash App <strong>$AKPrice777</strong>.</p>
+  <p class="sub">Apps by Andrew Price — no Google account, no Google rules. Pay by card and your download starts instantly.</p>
 </header>
 <main>
   <div class="note">
-    <strong>How buying works:</strong> tap <strong>Buy</strong> on the app you want and pay $1.99 on Cash App to
-    <code>$AKPrice777</code> — make sure to put the app's name in the payment note.
-    Andrew then sends you the download (and your unlock code, for the apps that use one).
-    Already bought it? Just install the download Andrew sent you — your code works on your phone.
+    <strong>How buying works:</strong> tap <strong>Buy</strong> on the app you want — you'll check out securely
+    (card, PayPal, or Apple Pay) and your download starts right after payment. No waiting, no codes to type —
+    every app here installs and runs, that's it.
     First install of anything: Android will ask you to allow installs from your browser — that's a one-time tap.
   </div>
   <div id="apps">Loading the catalog…</div>
   <div class="note">
-    <strong>Updates are automatic:</strong> this page and the Price Store app both read the same
-    <code>catalog.json</code>. When a new version is published here, the app offers the update — no new link needed.
+    <strong>Always the latest:</strong> this page reads the live <code>catalog.json</code>, so the versions
+    and prices you see here are always current — new builds are published here once and reach everyone.
   </div>
 </main>
 <script>
@@ -52,9 +51,10 @@ fetch('catalog.json').then(r => r.json()).then(cat => {
       <div>
         <div class="name">${a.name}</div>
         <div class="tag">${a.tag}</div>
-        <div class="meta">v${a.versionName} · ${fmt(a.size)} · ${a.price_usd ? `<span class="price">$${a.price_usd.toFixed(2)}</span>` : 'Free'}</div>
+        <div class="meta">v${a.versionName} · ${fmt(a.size)} · ${a.price_label ? `<span class="price">${a.price_label}</span>` : (a.price_usd ? `<span class="price">$${a.price_usd.toFixed(2)}</span>` : 'Free')}</div>
         <div class="desc">${a.desc}</div>
-        ${a.price_usd ? `<a class="btn" href="https://cash.app/$AKPrice777/${a.price_usd.toFixed(2)}">Buy — $${a.price_usd.toFixed(2)}</a>` : `<a class="btn" href="${a.apk}">Download — Free</a>`}
+        ${a.buy ? `<a class="btn" href="${a.buy}">${a.buy_label || ('Buy — $' + a.price_usd.toFixed(2))}</a>` : (a.price_usd ? '' : `<a class="btn" href="${a.apk}">Download — Free</a>`)}
+        ${a.buy2 ? `<a class="btn" href="${a.buy2}">${a.buy2_label}</a>` : ''}
       </div>
     </div>`).join('');
 }).catch(e => { document.getElementById('apps').textContent = 'Catalog failed to load.'; });
