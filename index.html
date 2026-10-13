@@ -43,7 +43,7 @@
   </div>
 </main>
 <script>
-fetch('catalog.json').then(r => r.json()).then(cat => {
+fetch('catalog.json', { cache: 'no-store' }).then(r => r.json()).then(cat => {
   const fmt = n => n >= 1048576 ? (n/1048576).toFixed(1)+' MB' : Math.round(n/1024)+' KB';
   document.getElementById('apps').innerHTML = cat.apps.map(a => `
     <div class="card">
