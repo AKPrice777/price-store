@@ -13,11 +13,11 @@
    "pkg": "com.droverslog.app",
    "price_label": "$4.99/mo · or $19.99 once",
    "price_usd": 4.99,
-   "sha256": "291533c2a4dc84581580a72c73e3b62a9f9e4306a5ca3ebb699b1a44b874a8c1",
+   "sha256": "9ff0ae71554067e9ac7da9ad814c43e9ffb35e06edb2edcfe94e5627be5107a5",
    "size": 8890395,
    "tag": "Farm routes, stops and laptop sync",
-   "versionCode": 46,
-   "versionName": "2.35"
+   "versionCode": 47,
+   "versionName": "2.36"
   },
   {
    "apk": "apks/recall.apk",
