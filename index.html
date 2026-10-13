@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Price Store</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; font-family: system-ui, sans-serif; background:#0e1116; color:#e8ecf1; }
+  header { padding:28px 20px 8px; max-width:760px; margin:0 auto; }
+  h1 { margin:0 0 4px; font-size:30px; }
+  .sub { color:#9fb0c3; margin:0 0 8px; }
+  main { max-width:760px; margin:0 auto; padding:12px 20px 40px; }
+  .card { display:flex; gap:16px; background:#171c24; border:1px solid #232b38; border-radius:16px; padding:16px; margin:14px 0; }
+  .card img { width:72px; height:72px; border-radius:16px; }
+  .noicon { width:72px; height:72px; border-radius:16px; background:#232b38; display:flex; align-items:center; justify-content:center; font-size:30px; flex:none; }
+  .name { font-size:19px; font-weight:700; }
+  .tag { color:#9fb0c3; font-size:14px; }
+  .meta { color:#7d8ea3; font-size:13px; margin-top:4px; }
+  .desc { font-size:14px; line-height:1.45; margin-top:8px; color:#cdd6e2; }
+  .price { font-weight:700; color:#7ee2a0; }
+  a.btn { display:inline-block; margin-top:10px; background:#2f9e5f; color:#fff; text-decoration:none; padding:9px 18px; border-radius:10px; font-weight:600; }
+  .note { background:#171c24; border:1px solid #232b38; border-radius:16px; padding:16px; font-size:14px; line-height:1.5; color:#cdd6e2; }
+  code { background:#232b38; padding:1px 6px; border-radius:6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Price Store</h1>
+  <p class="sub">Apps by Andrew Price — no Google account, no Google rules. $1.99 each via Cash App <strong>$AKPrice777</strong>.</p>
+</header>
+<main>
+  <div class="note">
+    <strong>How buying works:</strong> download the app you want, send $1.99 on Cash App to
+    <code>$AKPrice777</code> with the app name in the note, and Andrew sends you your unlock code.
+    Already bought it? Just install — your code works on your phone.
+    First install of anything: Android will ask you to allow installs from your browser — that's a one-time tap.
+  </div>
+  <div id="apps">Loading the catalog…</div>
+  <div class="note">
+    <strong>Updates are automatic:</strong> this page and the Price Store app both read the same
+    <code>catalog.json</code>. When a new version is published here, the app offers the update — no new link needed.
+  </div>
+</main>
+<script>
+fetch('catalog.json').then(r => r.json()).then(cat => {
+  const fmt = n => n >= 1048576 ? (n/1048576).toFixed(1)+' MB' : Math.round(n/1024)+' KB';
+  document.getElementById('apps').innerHTML = cat.apps.map(a => `
+    <div class="card">
+      ${a.icon ? `<img src="${a.icon}" alt="">` : `<div class="noicon">🛍️</div>`}
+      <div>
+        <div class="name">${a.name}</div>
+        <div class="tag">${a.tag}</div>
+        <div class="meta">v${a.versionName} · ${fmt(a.size)} · ${a.price_usd ? `<span class="price">$${a.price_usd.toFixed(2)}</span>` : 'Free'}</div>
+        <div class="desc">${a.desc}</div>
+        <a class="btn" href="${a.apk}">Download APK</a>
+      </div>
+    </div>`).join('');
+}).catch(e => { document.getElementById('apps').textContent = 'Catalog failed to load.'; });
+</script>
+</body>
+</html>
