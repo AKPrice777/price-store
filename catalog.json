@@ -78,20 +78,6 @@
    "tag": "Your phone becomes the remote",
    "versionCode": 4,
    "versionName": "1.3"
-  },
-  {
-   "apk": "apks/price-store.apk",
-   "desc": "The Price Store app itself. Install it once and every app above updates from this catalog automatically when a new version is published here.",
-   "icon": null,
-   "id": "price-store",
-   "name": "Price Store",
-   "pkg": "com.pricestore.app",
-   "price_usd": 0,
-   "sha256": "afc2117d167d5d885f200b6997cb775421f626cce89be918f68aeba4724505f1",
-   "size": 9369189,
-   "tag": "This store, as an app",
-   "versionCode": 5,
-   "versionName": "1.4"
   }
  ],
  "store": {
